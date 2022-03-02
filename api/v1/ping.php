@@ -1,3 +1,4 @@
 <?php
-echo "Pong";
+header ("Content-Type: application/json");
+echo '{"Ping": "Pong"}';
 ?>
