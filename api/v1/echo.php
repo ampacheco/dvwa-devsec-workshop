@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$body = file_get_contents('php://input');
 		$decoded = json_decode($body);
 		if (is_null ($decoded)) {
-			$response["Body"] = "Error - Invalid JSON submitted";
+			$response["Body"] = array ("Error" => "Invalid JSON submitted");
 		} else {
 			$response["Body"] = $decoded;
 		}
 	} else {
-		$response["Body"] = "Error - Content type not JSON";
+		$response["Body"] = array ("Error" => "Content type not JSON");
 	}
 }
 
