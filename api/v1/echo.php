@@ -1,11 +1,19 @@
 <?php
-print "Query string parameters:\n\n";
-var_dump ($_GET);
+header ("Content-Type: application/json");
+
+$response = array ("Query" => $_GET);
 
 if ($_SERVER['CONTENT_TYPE'] == "application/json") {
 	$body = file_get_contents('php://input');
-	print "The JSON body submitted is:\n\n";
-	var_dump ($body);
+	$decoded = json_decode($body);
+	if (is_null ($decoded)) {
+		$response["Body"] = "Error - Invalid JSON submitted";
+	} else {
+		$response["Body"] = $decoded;
+	}
+} else {
+	$response["Body"] = "Error - Content type not JSON";
 }
 
+echo json_encode ($response);
 ?>
