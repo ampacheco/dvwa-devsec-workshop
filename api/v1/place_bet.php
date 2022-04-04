@@ -45,9 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 			if ($dice_total == $guess) {
 				$response["Success"] = true;
-				$response['Winnings'] = $stake * $number_of_dice;
+				# Get back your stake and stake times the number of dice
+				$winnings = ($stake * $number_of_dice) + $stake;
+				$response['Winnings'] = $winnings;
+				$response['Balance'] = $balance + $winnings;
 			} else {
 				$response["Success"] = false;
+				$response['Winnings'] = 0;
+				# Forgot to check stake is positive so negative stake can add balance
+				$response['Balance'] = $balance - $stake;
 			}
 		} else {
 			return_error ("Missing parameter");
