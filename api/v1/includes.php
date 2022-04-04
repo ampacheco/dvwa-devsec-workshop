@@ -1,9 +1,9 @@
 <?php
 
 $users = array (
-				101 => array ("balance" => 100),
-				102 => array ("balance" => 66),
-				105 => array ("balance" => 31337),
+				101 => array ("name" => "Robin", "balance" => 100),
+				102 => array ("name" => "Pippa", "balance" => 66),
+				105 => array ("name" => "Sam", "balance" => 31337),
 			);
 
 function return_unauthorised($message) {
