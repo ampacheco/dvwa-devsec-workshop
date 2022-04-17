@@ -8,10 +8,12 @@ $response = array ();
 if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 	if (check_login()) {
 		$decoded = get_json_body();
-		if (property_exists ($decoded, "Name")) {
+		if (property_exists ($decoded, "Name") &&
+			property_exists ($decoded, "UserId") && is_numeric ($decoded->UserId)) {
+			$user_id = intval ($decoded->UserId);
 			$name = $decoded->Name;
 
-			$users[101]['name'] = $name;
+			update_profile($user_id, $name);
 
 			$response['Name'] = $name;
 		} else {

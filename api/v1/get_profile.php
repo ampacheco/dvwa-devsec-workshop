@@ -6,8 +6,11 @@ header ("Content-Type: application/json");
 $response = array ();
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-	if (check_login()) {
-		$response = $users[101]['name'];
+	$user_data = check_login();
+
+	if ($user_data) {
+		$name = $user_data->Name;
+		$response = array ("Name" => $user_data->Name);
 	} else {
 		return_unauthorised ("You are not logged in");
 	}
@@ -17,4 +20,3 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 echo json_encode ($response);
 ?>
-

@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			$guess = intval ($decoded->Guess);
 			$number_of_dice = intval ($decoded->NumDice);
 
-			if (array_key_exists ($user_id, $users)) {
-				$balance = $users[$user_id]["balance"];
-			} else {
+			// var_dump ($decoded);
+			$balance = get_balance($user_id);
+			if (!$balance) {
 				return_error ("User not found");
 			}
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			}
 
 			if ($guess < 1 || $guess > (6 * $number_of_dice)) {
-				return_error ("Guess outside range 1-6");
+				return_error ("Guess outside range 1-" . (6 * $number_of_dice));
 			}
 
 			# Forgot to check min value
@@ -45,15 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 			if ($dice_total == $guess) {
 				$response["Success"] = true;
-				# Get back your stake and stake times the number of dice
-				$winnings = ($stake * $number_of_dice) + $stake;
+				# Get stake times the number of dice
+				$winnings = ($stake * $number_of_dice);
 				$response['Winnings'] = $winnings;
+				$response['Stake'] = $stake;
 				$response['Balance'] = $balance + $winnings;
+				update_balance($user_id, $winnings);
 			} else {
 				$response["Success"] = false;
 				$response['Winnings'] = 0;
+				$response['Stake'] = $stake;
 				# Forgot to check stake is positive so negative stake can add balance
 				$response['Balance'] = $balance - $stake;
+				update_balance($user_id, (-1 * $stake));
 			}
 		} else {
 			return_error ("Missing parameter");

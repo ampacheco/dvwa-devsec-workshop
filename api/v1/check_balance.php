@@ -10,9 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 		if (array_key_exists ("UserId", $_GET) && is_numeric ($_GET['UserId'])) {
 			$user_id = intval ($_GET['UserId']);
 
-			if (array_key_exists ($user_id, $users)) {
-				$balance = $users[$user_id]["balance"];
-			} else {
+			$balance = get_balance($user_id);
+			if (is_null ($balance)) {
 				return_error ("User not found");
 			}
 			$response["Balance"] = $balance;

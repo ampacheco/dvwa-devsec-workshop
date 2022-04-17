@@ -1,5 +1,6 @@
 <?php
 require_once ("includes.php");
+require_once ("../../config/config.inc.php");
 
 header ("Content-Type: application/json");
 
