@@ -1,0 +1,9 @@
+ErrorDocument 404 /api/v1/404.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule (.*) $1.php [L]
+
+Header add Access-Control-Allow-Origin *
