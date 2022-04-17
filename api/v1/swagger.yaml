@@ -27,9 +27,8 @@ paths:
         200:
           description: A pong.
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Pong'
+            type: object
+            $ref: '#/definitions/Pong'
   /echo:
     get:
       summary: Echo the query string passed in
@@ -47,8 +46,7 @@ paths:
           description: An array of price estimates by product
           schema:
             type: array
-            items:
-              $ref: '#/definitions/Echo'
+            $ref: '#/definitions/Query'
         default:
           description: Unexpected error
           schema:
@@ -140,12 +138,13 @@ definitions:
       Ping:
         type: string
         description: Will say pong.
-  Echo:
+  Query:
     type: object
     properties:
       Query:
         type: object
         description: Will contain the parameters passed in.
+        $ref: '#/definitions/EchoGet'
   EchoGet:
     type: object
     properties:
@@ -221,6 +220,10 @@ definitions:
   Activities:
     type: object
     properties:
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
       offset:
         type: integer
         format: int32
@@ -233,10 +236,6 @@ definitions:
         type: integer
         format: int32
         description: Total number of items available.
-      history:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
   Error:
     type: object
     properties:
