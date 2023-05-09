@@ -8,8 +8,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-    – uses: actions/checkout@v2
+    - name: SAST
+      uses: actions/checkout@v2
+      run: | 
+        echo "Done."
+
+    -     
  
     # – name: SAST
     #   run: |
