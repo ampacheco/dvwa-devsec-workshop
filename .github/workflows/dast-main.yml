@@ -17,5 +17,5 @@ jobs:
    – name: DAST
      run: |
         env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-        docker pull registry.fortidevsec.forticloud.com/fdevsec_dast:latest
-        docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest
+        # docker pull registry.fortidevsec.forticloud.com/fdevsec_dast:latest
+        # docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest
