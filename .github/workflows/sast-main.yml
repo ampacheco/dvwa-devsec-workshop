@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: SAST
+    - name: Checkout
       uses: actions/checkout@v2
+
+    - name: SAST
       run: | 
         echo "Done."
  
