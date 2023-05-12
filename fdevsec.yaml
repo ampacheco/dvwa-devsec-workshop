@@ -11,5 +11,5 @@ scanners:
   #- sca
 
 dast:
-  url: web-dvwa.eastus.azurecontainer.io
+  url: 143.244.167.47
   full_scan: true #true|false
