@@ -1,0 +1,554 @@
+{
+	"info": {
+		"_postman_id": "40c1f2ab-41a4-4cdf-a889-05df05794c9b",
+		"name": "DVAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/ping.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"ping.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Echo GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/echo.php?fred=blogs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"echo.php"
+					],
+					"query": [
+						{
+							"key": "fred",
+							"value": "blogs"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Echo POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hello\":\"world\",\r\n    \"1\":\"aaa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/echo.php?fred=blogs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"echo.php"
+					],
+					"query": [
+						{
+							"key": "fred",
+							"value": "blogs"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('Token', \"\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.test(\"Token in response\", function () {\r",
+							"        if (pm.expect(jsonData).to.have.property(\"Token\")) {\r",
+							"            pm.collectionVariables.set('Token', jsonData.Token);\r",
+							"        }\r",
+							"    });\r",
+							"    pm.test(\"User ID in response\", function () {\r",
+							"        if (pm.expect(jsonData).to.have.property(\"UserId\")) {\r",
+							"            pm.collectionVariables.set('UserId', jsonData.UserId);\r",
+							"        }\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"robin\",\r\n    \"Password\": \"Password1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Token with echo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/echo.php?Token={{Token}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"echo.php"
+					],
+					"query": [
+						{
+							"key": "Token",
+							"value": "{{Token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: {{Token}}",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "test",
+						"value": "{{Token}}",
+						"type": "default"
+					},
+					{
+						"key": "test2",
+						"value": "a{{Token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/get_data.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"get_data.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: {{Token}}",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "test",
+						"value": "{{Token}}",
+						"type": "default"
+					},
+					{
+						"key": "test2",
+						"value": "a{{Token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/get_profile.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"get_profile.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: {{Token}}",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "test",
+						"value": "{{Token}}",
+						"type": "default"
+					},
+					{
+						"key": "test2",
+						"value": "a{{Token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/check_balance.php?UserId={{UserId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"check_balance.php"
+					],
+					"query": [
+						{
+							"key": "UserId",
+							"value": "{{UserId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check balance hack",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: {{Token}}",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "test",
+						"value": "{{Token}}",
+						"type": "default"
+					},
+					{
+						"key": "test2",
+						"value": "a{{Token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/check_balance.php?UserId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"check_balance.php"
+					],
+					"query": [
+						{
+							"key": "UserId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place Bet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserId\": {{UserId}},\r\n    \"Stake\": 10,\r\n    \"Guess\": 20,\r\n    \"NumDice\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/place_bet.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"place_bet.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place Bet hack",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserId\": {{UserId}},\r\n    \"Stake\": -100,\r\n    \"Guess\": 20,\r\n    \"NumDice\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/place_bet.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"place_bet.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\":\"Fred\",\n    \"UserId\": {{UserId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/put_profile.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"put_profile.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using wrong method",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\":\"Fred\",\n    \"UserId\": {{UserId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/put_profile.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"put_profile.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unknown endpoint",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\":\"Fred\",\n    \"UserId\": {{UserId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/unknown",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"unknown"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Token",
+			"value": ""
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		}
+	]
+}
