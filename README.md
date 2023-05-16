@@ -1,3 +1,9 @@
+## Document Versions
+- DAST added. Researching how to execute agaisnt ACI.
+- SAST Workflows added.
+
+
+
 # DAMN VULNERABLE WEB APPLICATION
 
 Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is damn vulnerable. Its main goal is to be an aid for security professionals to test their skills and tools in a legal environment, help web developers better understand the processes of securing web applications and to aid both students & teachers to learn about web application security in a controlled class room environment.
@@ -8,7 +14,7 @@ Please note, there are **both documented and undocumented vulnerabilities** with
 
 ## WARNING!
 
-Damn Vulnerable Web Application is damn vulnerable! **Do not upload it to your hosting provider's public html folder or any Internet facing servers**, as they will be compromised. It is recommended using a virtual machine (such as [VirtualBox](https://www.virtualbox.org/) or [VMware](https://www.vmware.com/)), which is set to NAT networking mode. Inside a guest machine, you can download and install [XAMPP](https://www.apachefriends.org/en/xampp.html) for the web server and database.
+Damn Vulnerable Web Application is damn vulnerable! **Do not upload it to your hosting provider's public html folder or any Internet facing servers**, as they will be compromised. It is recommended using a virtual machine (such as [VirtualBox](https://www.virtualbox.org/) or [VMware](https://www.vmware.com/)), which is set to NAT networking mode. Inside a guest machine, you can download and install [XAMPP](https://www.apachefriends.org/) for the web server and database.
 
 ### Disclaimer
 
@@ -38,11 +44,15 @@ along with Damn Vulnerable Web Application (DVWA).  If not, see <https://www.gnu
 ## Internationalisation
 
 This file is available in multiple languages:
-
+- Arabic: [العربية](README.ar.md)
 - Chinese: [简体中文](README.zh.md)
+- French: [Français](README.fr.md)
+- Persian: [فارسی](README.fa.md)
+- Portuguese: [Português](README.pt.md)
+- Spanish: [Español](README.es.md)
 - Turkish: [Türkçe](README.tr.md)
 
-If you would like to contribute a translation, please submit a PR. Note though, this does not mean just run it through Google Translate and send that in, those will be rejected.
+If you would like to contribute a translation, please submit a PR. Note though, this does not mean just run it through Google Translate and send that in, those will be rejected. Submit your translated version by adding a new 'README.xx.md' file where xx is the two-letter code of your desired language (based on [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)).
 
 - - -
 
@@ -60,28 +70,47 @@ Or [download a ZIP of the files](https://github.com/digininja/DVWA/archive/maste
 
 ## Installation
 
-**Please make sure your config/config.inc.php file exists. Only having a config.inc.php.dist will not be sufficient and you'll have to edit it to suit your environment and rename it to config.inc.php. [Windows may hide the trailing extension.](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)**
-
 ### Installation Videos
 
-- [Installing Damn Vulnerable Web Application (DVWA) on Windows 10](https://www.youtube.com/watch?v=cak2lQvBRAo) [12:39 minutes]
+- [Installing DVWA on Kali running in VirtualBox](https://www.youtube.com/watch?v=WkyDxNJkgQ4)
+- [Installing DVWA on Windows using XAMPP](https://youtu.be/Yzksa_WjnY0)
+- [Installing Damn Vulnerable Web Application (DVWA) on Windows 10](https://www.youtube.com/watch?v=cak2lQvBRAo)
 
 ### Windows + XAMPP
 
-The easiest way to install DVWA is to download and install [XAMPP](https://www.apachefriends.org/en/xampp.html) if you do not already have a web server setup.
+The easiest way to install DVWA is to download and install [XAMPP](https://www.apachefriends.org/) if you do not already have a web server setup.
 
 XAMPP is a very easy to install Apache Distribution for Linux, Solaris, Windows and Mac OS X. The package includes the Apache web server, MySQL, PHP, Perl, a FTP server and phpMyAdmin.
 
-XAMPP can be downloaded from:
-<https://www.apachefriends.org/en/xampp.html>
+This [video](https://youtu.be/Yzksa_WjnY0) walks you through the installation process for Windows but it should be similar for other OSs.
 
-Simply unzip dvwa.zip, place the unzipped files in your public html folder, then point your browser to: `http://127.0.0.1/dvwa/setup.php`
+### Config File
+
+DVWA ships with a dummy copy of its config file which you will need to copy into place and then make the appropriate changes. On Linux, assuming you are in the DVWA directory, this can be done as follows:
+
+`cp config/config.inc.php.dist config/config.inc.php`
+
+On Windows, this can be a bit harder if you are hiding file extensions, if you are unsure about this, this blog post explains more about it:
+
+[How to Make Windows Show File Extensions](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)
 
 ### Linux Packages
 
 If you are using a Debian based Linux distribution, you will need to install the following packages _(or their equivalent)_:
 
-`apt-get -y install apache2 mariadb-server php php-mysqli php-gd libapache2-mod-php`
+- apache2
+- libapache2-mod-php
+- mariadb-server
+- mariadb-client
+- php php-mysqli
+- php-gd
+
+I would recommend doing an update before this, just so you make sure you are going to get the latest version of everything.
+
+```
+apt update
+apt install -y apache2 mariadb-server mariadb-client php php-mysqli php-gd libapache2-mod-php
+```
 
 The site will work with MySQL instead of MariaDB but we strongly recommend MariaDB as it works out of the box whereas you have to make changes to get MySQL to work correctly.
 
@@ -117,6 +146,22 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+### Disable Authentication
+
+Some tools don't work well with authentication so can't be used with DVWA. To get around this, there is a config option to disable authentication checking. To do this, simply set the following in the config file:
+
+```php
+$_DVWA[ 'disable_authentication' ] = true;
+```
+
+You will also need to set the security level to one that is appropriate to the testing you want to do:
+
+```php
+$_DVWA[ 'default_security_level' ] = 'low';
+```
+
+In this state, you can access all the features without needing to log in and set any cookies.
+
 ### Other Configuration
 
 Depending on your Operating System, as well as version of PHP, you may wish to alter the default configuration. The location of the files will be different on a per-machine basis.
@@ -127,12 +172,11 @@ Depending on your Operating System, as well as version of PHP, you may wish to a
 * `./external/phpids/0.6/lib/IDS/tmp/phpids_log.txt` - Needs to be writable by the web service (if you wish to use PHPIDS).
 
 **PHP configuration**:
-
-* `allow_url_include = on` - Allows for Remote File Inclusions (RFI)   [[allow_url_include](https://secure.php.net/manual/en/filesystem.configuration.php#ini.allow-url-include)]
-* `allow_url_fopen = on` -  Allows for Remote File Inclusions (RFI)    [[allow_url_fopen](https://secure.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen)]
-* `safe_mode = off` - (If PHP <= v5.4) Allows for SQL Injection (SQLi) [[safe_mode](https://secure.php.net/manual/en/features.safe-mode.php)]
-* `magic_quotes_gpc = off` - (If PHP <= v5.4) Allows for SQL Injection (SQLi) [[magic_quotes_gpc](https://secure.php.net/manual/en/security.magicquotes.php)]
-* `display_errors = off` - (Optional) Hides PHP warning messages to make it less verbose [[display_errors](https://secure.php.net/manual/en/errorfunc.configuration.php#ini.display-errors)]
+* To allow  Remote File Inclusions (RFI):
+    * `allow_url_include = on` [[allow_url_include](https://secure.php.net/manual/en/filesystem.configuration.php#ini.allow-url-include)]
+    * `allow_url_fopen = on` [[allow_url_fopen](https://secure.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen)]
+* To optionally reduce verbosity by hiding PHP warning messages:
+    * `display_errors = off` [[display_errors](https://secure.php.net/manual/en/errorfunc.configuration.php#ini.display-errors)]
 
 **File: `config/config.inc.php`**:
 
@@ -153,6 +197,8 @@ _Note: This will be different if you installed DVWA into a different directory._
 - - -
 
 ## Docker Container
+
+_This section of the readme was added by @thegrims, for support on Docker issues, please contact them or @opsxcq who is the maintainer of the Docker image and repo. Any issue tickets will probably be pointed at this and closed._
 
 - [dockerhub page](https://hub.docker.com/r/vulnerables/web-dvwa/)
 `docker run --rm -it -p 80:80 vulnerables/web-dvwa`
@@ -321,34 +367,6 @@ For more information, see:
 
 <https://www.ryadel.com/en/fix-mysql-server-gone-away-packets-order-similar-mysql-related-errors/>
 
-### SQL Injection won't work on PHP v5.2.6.
-
-PHP 5.x reached end of life in January 2019 so we would recommend running DVWA with a current 7.x version, if you must use 5.x...
-
-If you are using PHP v5.2.6 or above, you will need to do the following in order for SQL injection and other vulnerabilities to work.
-
-In `.htaccess`:
-
-Replace:
-
-```php
-<IfModule mod_php5.c>
-    php_flag magic_quotes_gpc off
-    #php_flag allow_url_fopen on
-    #php_flag allow_url_include on
-</IfModule>
-```
-
-With:
-
-```php
-<IfModule mod_php5.c>
-    magic_quotes_gpc = Off
-    allow_url_fopen = On
-    allow_url_include = On
-</IfModule>
-```
-
 ### Command Injection won't work
 
 Apache may not have high enough privileges to run commands on the web server. If you are running DVWA under Linux make sure you are logged in as root. Under Windows log in as Administrator.
@@ -361,7 +379,7 @@ You may be running into problems with SELinux.  Either disable SELinux or run th
 setsebool -P httpd_can_network_connect_db 1
 ```
 
-### Anything else
+### Anything Else
 
 For the latest troubleshooting information please read both open and closed tickets in the git repo:
 
@@ -375,6 +393,14 @@ If raising a ticket, please submit at least the following information:
 - The last 5 lines from the web server error log directly after whatever error you are reporting occurs
 - If it is a database authentication problem, go through the steps above and screenshot each step. Submit these along with a screenshot of the section of the config file showing the database user and password.
 - A full description of what is going wrong, what you expect to happen, and what you have tried to do to fix it. "login broken" is no enough for us to understand your problem and to help fix it.
+
+- - -
+
+## Tutorials
+
+I am going to try to put together some tutorial videos that walk through some of the vulnerabilities and show how to detect them and then how to exploit them. Here are the ones I've made so far:
+
+[Finding and Exploiting Reflected XSS](https://youtu.be/V4MATqtdxss)
 
 - - -
 
@@ -399,9 +425,22 @@ The challenges are exactly the same as for MySQL, they just run against SQLite3 
 
 - - -
 
-## Links
+👨‍💻 Contributors
+-----
 
-Homepage: <https://dvwa.co.uk/>
+Thanks for all your contributions and keeping this project updated. :heart:
+
+If you have an idea, some kind of improvement or just simply want to collaborate, you are welcome to contribute and participate in the Project, feel free to send your PR.
+
+<p align="center">
+<a href="https://github.com/digininja/DVWA/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=digininja/DVWA&max=500">
+</a>
+</p>
+
+- - -
+
+## Links
 
 Project Home: <https://github.com/digininja/DVWA>
 

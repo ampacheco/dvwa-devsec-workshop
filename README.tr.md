@@ -7,7 +7,7 @@ DVWA, **en yaygın web zafiyetlerinden bazılarının** basit bir arayüz üzeri
 
 ## UYARI!
 
-Damn Vulnerable Web Application epey zafiyetlidir! **Internet üzerinden erişilebilen bir sunucuya veya barındırma hizmeti sağlayıcınızın public_html dizinine yüklemeyin.** Bu durum, sunucunuzu tehlikeye atar. [VirtualBox](https://www.virtualbox.org/) veya [VMware](https://www.vmware.com/) gibi bir ortamda, sanal makinede, NAT ağı modunda kullanmanız önerilir. Sanal makine içinde web sunucusu ve veri tabanı için [XAMPP](https://www.apachefriends.org/en/xampp.html) indirip kurabilirsiniz.
+Damn Vulnerable Web Application epey zafiyetlidir! **Internet üzerinden erişilebilen bir sunucuya veya barındırma hizmeti sağlayıcınızın public_html dizinine yüklemeyin.** Bu durum, sunucunuzu tehlikeye atar. [VirtualBox](https://www.virtualbox.org/) veya [VMware](https://www.vmware.com/) gibi bir ortamda, sanal makinede, NAT ağı modunda kullanmanız önerilir. Sanal makine içinde web sunucusu ve veri tabanı için [XAMPP](https://www.apachefriends.org/) indirip kurabilirsiniz.
 
 ### Sorumluluk Reddi
 
@@ -65,12 +65,12 @@ ya da [ZIP olarak indirebilirsiniz](https://github.com/digininja/DVWA/archive/ma
 
 ### Windows + XAMPP
 
-Eğer bir web sunucusu kurulumunuz yoksa, DVWA'yı kurmanın en kolay yolu [XAMPP](https://www.apachefriends.org/en/xampp.html) indirip kurmaktır.
+Eğer bir web sunucusu kurulumunuz yoksa, DVWA'yı kurmanın en kolay yolu [XAMPP](https://www.apachefriends.org/) indirip kurmaktır.
 
 XAMPP; Linux, Solaris, Windows ve Mac OS X için kurulumu oldukça kolay bir Apache ürünüdür. Paketin içeriğinde Apache web sunucusu, MySQL, PHP, Perl, bir FTP sunucusu ve phpMyAdmin yer almaktadır.
 
 XAMPP'ı şu bağlantıdan indirebilirsiniz:
-<https://www.apachefriends.org/en/xampp.html>
+<https://www.apachefriends.org/>
 
 dvwa.zip dosyasını arşivden çıkarın. Çıkarılan dosyaları public html dizininize taşıyın. Sonra tarayıcınızdan `http://127.0.0.1/dvwa/setup.php` adresine gidin.
 
@@ -400,8 +400,6 @@ Olay MySQL ile aynı. Sadece SQLite3'e karşı yapılacak.
 - - -
 
 ## Bağlantılar
-
-Anasayfa: <https://dvwa.co.uk/>
 
 Proje Sayfası: <https://github.com/digininja/DVWA>
 

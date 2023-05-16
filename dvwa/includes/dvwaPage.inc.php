@@ -5,15 +5,12 @@ if( !defined( 'DVWA_WEB_PAGE_TO_ROOT' ) ) {
 	exit;
 }
 
-session_start(); // Creates a 'Full Path Disclosure' vuln.
-
 if (!file_exists(DVWA_WEB_PAGE_TO_ROOT . 'config/config.inc.php')) {
 	die ("DVWA System error - config file not found. Copy config/config.inc.php.dist to config/config.inc.php and configure to your environment.");
 }
 
 // Include configs
 require_once DVWA_WEB_PAGE_TO_ROOT . 'config/config.inc.php';
-require_once( 'dvwaPhpIds.inc.php' );
 
 // Declare the $html variable
 if( !isset( $html ) ) {
@@ -26,16 +23,36 @@ if( !isset( $_COOKIE[ 'security' ] ) || !in_array( $_COOKIE[ 'security' ], $secu
 	// Set security cookie to impossible if no cookie exists
 	if( in_array( $_DVWA[ 'default_security_level' ], $security_levels) ) {
 		dvwaSecurityLevelSet( $_DVWA[ 'default_security_level' ] );
-	}
-	else {
+	} else {
 		dvwaSecurityLevelSet( 'impossible' );
 	}
-
-	if( $_DVWA[ 'default_phpids_level' ] == 'enabled' )
-		dvwaPhpIdsEnabledSet( true );
-	else
-		dvwaPhpIdsEnabledSet( false );
 }
+
+// This will setup the session cookie based on
+// the security level.
+
+if (dvwaSecurityLevelGet() == 'impossible') {
+	$httponly = true;
+	$samesite = true;
+}
+else {
+	$httponly = false;
+	$samesite = false;
+}
+
+$maxlifetime = 86400;
+$secure = false;
+$domain = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
+
+session_set_cookie_params([
+	'lifetime' => $maxlifetime,
+	'path' => '/',
+	'domain' => $domain,
+	'secure' => $secure,
+	'httponly' => $httponly,
+	'samesite' => $samesite
+]);
+session_start();
 
 if (!array_key_exists ("default_locale", $_DVWA)) {
 	$_DVWA[ 'default_locale' ] = "en";
@@ -65,36 +82,12 @@ function &dvwaSessionGrab() {
 
 
 function dvwaPageStartup( $pActions ) {
-	if( in_array( 'authenticated', $pActions ) ) {
+	if (in_array('authenticated', $pActions)) {
 		if( !dvwaIsLoggedIn()) {
 			dvwaRedirect( DVWA_WEB_PAGE_TO_ROOT . 'login.php' );
 		}
 	}
-
-	if( in_array( 'phpids', $pActions ) ) {
-		if( dvwaPhpIdsIsEnabled() ) {
-			dvwaPhpIdsTrap();
-		}
-	}
 }
-
-
-function dvwaPhpIdsEnabledSet( $pEnabled ) {
-	$dvwaSession =& dvwaSessionGrab();
-	if( $pEnabled ) {
-		$dvwaSession[ 'php_ids' ] = 'enabled';
-	}
-	else {
-		unset( $dvwaSession[ 'php_ids' ] );
-	}
-}
-
-
-function dvwaPhpIdsIsEnabled() {
-	$dvwaSession =& dvwaSessionGrab();
-	return isset( $dvwaSession[ 'php_ids' ] );
-}
-
 
 function dvwaLogin( $pUsername ) {
 	$dvwaSession =& dvwaSessionGrab();
@@ -103,6 +96,11 @@ function dvwaLogin( $pUsername ) {
 
 
 function dvwaIsLoggedIn() {
+	global $_DVWA;
+
+	if (in_array("disable_authentication", $_DVWA) && $_DVWA['disable_authentication']) {
+		return true;
+	}
 	$dvwaSession =& dvwaSessionGrab();
 	return isset( $dvwaSession[ 'username' ] );
 }
@@ -120,14 +118,14 @@ function dvwaPageReload() {
 
 function dvwaCurrentUser() {
 	$dvwaSession =& dvwaSessionGrab();
-	return ( isset( $dvwaSession[ 'username' ]) ? $dvwaSession[ 'username' ] : '') ;
+	return ( isset( $dvwaSession[ 'username' ]) ? $dvwaSession[ 'username' ] : 'Unknown') ;
 }
 
 // -- END (Session functions)
 
 function &dvwaPageNewGrab() {
 	$returnArray = array(
-		'title'           => 'Damn Vulnerable Web Application (DVWA) v' . dvwaVersionGet() . '',
+		'title'           => 'Damn Vulnerable Web Application (DVWA)',
 		'title_separator' => ' :: ',
 		'body'            => '',
 		'page_id'         => '',
@@ -139,7 +137,21 @@ function &dvwaPageNewGrab() {
 
 
 function dvwaSecurityLevelGet() {
-	return isset( $_COOKIE[ 'security' ] ) ? $_COOKIE[ 'security' ] : 'impossible';
+	global $_DVWA;
+
+	// If there is a security cookie, that takes priority.
+	if (isset($_COOKIE['security'])) {
+		return $_COOKIE[ 'security' ];
+	}
+
+	// If not, check to see if authentication is disabled, if it is, use
+	// the default security level.
+	if (in_array("disable_authentication", $_DVWA) && $_DVWA['disable_authentication']) {
+		return $_DVWA[ 'default_security_level' ];
+	}
+
+	// Worse case, set the level to impossible.
+	return 'impossible';
 }
 
 
@@ -150,7 +162,7 @@ function dvwaSecurityLevelSet( $pSecurityLevel ) {
 	else {
 		$httponly = false;
 	}
-	setcookie( session_name(), session_id(), 0, '/', "", false, $httponly );
+
 	setcookie( 'security', $pSecurityLevel, 0, "/", "", false, $httponly );
 }
 
@@ -235,6 +247,10 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_s', 'name' => 'XSS (Stored)', 'url' => 'vulnerabilities/xss_s/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'csp', 'name' => 'CSP Bypass', 'url' => 'vulnerabilities/csp/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'javascript', 'name' => 'JavaScript', 'url' => 'vulnerabilities/javascript/' );
+		if (dvwaCurrentUser() == "admin") {
+			$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'authbypass', 'name' => 'Authorisation Bypass', 'url' => 'vulnerabilities/authbypass/' );
+		}
+		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'open_redirect', 'name' => 'Open HTTP Redirect', 'url' => 'vulnerabilities/open_redirect/' );
 	}
 
 	$menuBlocks[ 'meta' ] = array();
@@ -279,7 +295,6 @@ function dvwaHtmlEcho( $pPage ) {
 	}
 	// -- END (security cookie)
 
-	$phpIdsHtml   = '<em>PHPIDS:</em> ' . ( dvwaPhpIdsIsEnabled() ? 'enabled' : 'disabled' );
 	$userInfoHtml = '<em>Username:</em> ' . ( dvwaCurrentUser() );
 	$securityLevelHtml = "<em>Security Level:</em> {$securityLevelHtml}";
 	$localeHtml = '<em>Locale:</em> ' . ( dvwaLocaleGet() );
@@ -293,7 +308,7 @@ function dvwaHtmlEcho( $pPage ) {
 
 	$systemInfoHtml = "";
 	if( dvwaIsLoggedIn() ) 
-		$systemInfoHtml = "<div align=\"left\">{$userInfoHtml}<br />{$securityLevelHtml}<br />{$localeHtml}<br />{$phpIdsHtml}<br />{$sqliDbHtml}</div>";
+		$systemInfoHtml = "<div align=\"left\">{$userInfoHtml}<br />{$securityLevelHtml}<br />{$localeHtml}<br />{$sqliDbHtml}</div>";
 	if( $pPage[ 'source_button' ] ) {
 		$systemInfoHtml = dvwaButtonSourceHtmlGet( $pPage[ 'source_button' ] ) . " $systemInfoHtml";
 	}
@@ -357,8 +372,8 @@ function dvwaHtmlEcho( $pPage ) {
 
 			<div id=\"footer\">
 
-				<p>Damn Vulnerable Web Application (DVWA) v" . dvwaVersionGet() . "</p>
-				<script src='" . DVWA_WEB_PAGE_TO_ROOT . "/dvwa/js/add_event_listeners.js'></script>
+				<p>Damn Vulnerable Web Application (DVWA)</p>
+				<script src='" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/js/add_event_listeners.js'></script>
 
 			</div>
 
@@ -560,6 +575,12 @@ function dvwaGuestbook() {
 
 // Token functions --
 function checkToken( $user_token, $session_token, $returnURL ) {  # Validate the given (CSRF) token
+	global $_DVWA;
+
+	if (in_array("disable_authentication", $_DVWA) && $_DVWA['disable_authentication']) {
+		return true;
+	}
+
 	if( $user_token !== $session_token || !isset( $session_token ) ) {
 		dvwaMessagePush( 'CSRF token is incorrect' );
 		dvwaRedirect( $returnURL );
@@ -585,7 +606,6 @@ function tokenField() {  # Return a field for the (CSRF) token
 
 // Setup Functions --
 $PHPUploadPath    = realpath( getcwd() . DIRECTORY_SEPARATOR . DVWA_WEB_PAGE_TO_ROOT . "hackable" . DIRECTORY_SEPARATOR . "uploads" ) . DIRECTORY_SEPARATOR;
-$PHPIDSPath       = realpath( getcwd() . DIRECTORY_SEPARATOR . DVWA_WEB_PAGE_TO_ROOT . "external" . DIRECTORY_SEPARATOR . "phpids" . DIRECTORY_SEPARATOR . dvwaPhpIdsVersionGet() . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "IDS" . DIRECTORY_SEPARATOR . "tmp" . DIRECTORY_SEPARATOR . "phpids_log.txt" );
 $PHPCONFIGPath       = realpath( getcwd() . DIRECTORY_SEPARATOR . DVWA_WEB_PAGE_TO_ROOT . "config");
 
 
@@ -601,7 +621,6 @@ $DVWARecaptcha    = 'reCAPTCHA key: <span class="' . ( ( isset( $_DVWA[ 'recaptc
 
 $DVWAUploadsWrite = '[User: ' . get_current_user() . '] Writable folder ' . $PHPUploadPath . ': <span class="' . ( is_writable( $PHPUploadPath ) ? 'success">Yes' : 'failure">No' ) . '</span>';                                     // File Upload
 $bakWritable = '[User: ' . get_current_user() . '] Writable folder ' . $PHPCONFIGPath . ': <span class="' . ( is_writable( $PHPCONFIGPath ) ? 'success">Yes' : 'failure">No' ) . '</span>';   // config.php.bak check                                  // File Upload
-$DVWAPHPWrite     = '[User: ' . get_current_user() . '] Writable file ' . $PHPIDSPath . ': <span class="' . ( is_writable( $PHPIDSPath ) ? 'success">Yes' : 'failure">No' ) . '</span>';                                              // PHPIDS
 
 $DVWAOS           = 'Operating system: <em>' . ( strtoupper( substr (PHP_OS, 0, 3)) === 'WIN' ? 'Windows' : '*nix' ) . '</em>';
 $SERVER_NAME      = 'Web Server SERVER_NAME: <em>' . $_SERVER[ 'SERVER_NAME' ] . '</em>';                                                                                                          // CSRF
