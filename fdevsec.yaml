@@ -4,12 +4,21 @@ id:
   org: f3f72eaa-b943-497b-b00e-eb57d9ac7574
   app: 68ce1d45-409a-4885-a1db-a4c8dc5ed941
 
+# Optional parameters.
 scanners:
+  - sast
   - dast
-  #- sast
-  #- secret
-  #- sca
+  - secret
+  - sca   
 
+languages:
+  - python
+  - javascript
+     
 dast:
-  url: 143.244.167.47
+  url: http://web-dvwa.eastus.azurecontainer.io/login.php
+  fortipentest_scanner: true #true|false
   full_scan: true #true|false
+     
+resource:
+  serial_scan: false #true|false
