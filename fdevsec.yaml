@@ -1,8 +1,8 @@
 version: v1
 
 id:
-  org: f3f72eaa-b943-497b-b00e-eb57d9ac7574
-  app: 68ce1d45-409a-4885-a1db-a4c8dc5ed941
+  org: [chage-to-your-organization-id] # afafafaf-af00-af00-f00e-eco747474747
+  app: [chage-to-your-application-id]  # afafafaf-af00-af00-f00e-eco747474747
 
 # Optional parameters.
 scanners:
