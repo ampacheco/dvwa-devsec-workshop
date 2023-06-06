@@ -1,4 +1,4 @@
-name: FortiDevSec Scanner SAST CI
+name: FortiDevSec Buil Deploy SAST DAST
 on:
   push:
     branches: [ main ]
