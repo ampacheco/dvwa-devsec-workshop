@@ -46,15 +46,12 @@ Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore
 ![]()
 
 
-### The UI
 
-![The UI](/images/the-basic-ui.png)
-
-### The Basic Workflow
+### 🟩The Basic Workflow
 
 ![The Basic Workflow](/images/the-basic-workflow.png)
 
-### Summary of Scanners
+### 🟩Summary of Scanners
 
 |Sacanner|Description|
 |---|---|
@@ -62,14 +59,14 @@ Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore
 |**DAST**|Scans a deployed application at runtime to detect vulnerabilities. The DAST scanner supports scanning of assets/targets hosted on both the internal network of an organization and the external/public network using FortiDAST proxy server. See FortiDAST Proxy Server.|
 |**SCA**|Scans for vulnerabilities in the open-source libraries/components used by the application. The programming languages supported by the SCA scanner are Java, Javascript, Ruby, Python, Golang, and PHP.|
 _Others Scanneres ..._
-
-|Sacanner|Description|
+|**Sacanner**|**Description**|
 |---|---|
 |**Secret**|Scans to detect certificates and other secrets committed into Git.|
 |**IaC**|Scans your IaC configuration files for Terraform, Cloud Formation, Docker and Kubernetes, to detect configuration issues.|
 |**Container**|Scans container components to identify potential vulnerabilities.|
 
-
+### 🟩The UI
+![The UI](/images/the-basic-ui.png)
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
