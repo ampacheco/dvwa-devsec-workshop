@@ -33,59 +33,30 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 
 🚀 **Have fun with an interactive session**
 
-## 2. Frequently asked questions
-
-<p/>
-<details>
-<summary><b> 1️⃣ Can I run this workshop on my computer?</b></summary>
-<hr>
-<p>There is nothing preventing you from running the workshop on your own machine. If you do so, you will need the following:
-<ol>
-<li><b>git</b> installed on your local system
-</ol>
-</p>
-In this readme, we try to provide instructions for local development as well - but keep in mind that the main focus is development on Gitpod, hence <strong>we can't guarantee live support</strong> about local development in order to keep on track with the schedule. However, we will do our best to give you the info you need to succeed.
-</details>
-<p/>
-<details>
-<summary><b> 2️⃣ What other prerequisites are required?</b></summary>
-<hr>
-<ul>
-<li>You will need enough *real estate* on screen, we will ask you to open a few windows and it would not fit on mobiles (tablets should be OK)
-<li>You will need an Astra account: don't worry, we'll work through that in the following
-<li>As "Intermediate level" we expect you to know what java and Spring are. 
-</ul>
-</p>
-</details>
-<p/>
-<details>
-<summary><b> 3️⃣ Do I need to pay for anything for this workshop?</b></summary>
-<hr>
-<b>No.</b> All tools and services we provide here are FREE. FREE not only during the session but also after.
-</details>
-<p/>
-<details>
-<summary><b> 4️⃣ Will I get a certificate if I attend this workshop?</b></summary>
-<hr>
-Attending the session is not enough. You need to complete the homework detailed below and you will get a nice badge that you can share on linkedin or anywhere else *(open badge specification)*
-</details>
-<p/>
-
-## 3. Materials for the Session
-
-It doesn't matter if you join our workshop live or you prefer to work at your own pace,
-we have you covered. In this repository, you'll find everything you need for this workshop:
-
-- [Slide deck](/slides/slides.pdf)
-- [Discord chat](https://dtsx.io/discord)
-- [Questions and Answers](https://community.datastax.com/)
-- [Twitch backup](https://www.twitch.tv/datastaxdevs)
-
-----
 
 # 🏁 Start Hands-on
 
-## 4. Create your Astra DB instance
+## 2. The FortiDevSec UI
+
+FortiDevSec is an  application security testing product that offers a comprehensive SaaS based continuous application testing for software developers and devops, without the need for any security expertise.
+
+Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore the main dashboard and then the application dashboard.
+
+![]()
+
+|Sacanner|Description|
+|---|---|
+|**SAST**|Scans the source code of an application during development to minimize zero-day vulnerabilities. The application languages supported for SAST are Shell, Java, Ruby on Rails, Python, Golang, PHP, JavaScript/NodeJS, C and C++.|
+|**DAST**|Scans a deployed application at runtime to detect vulnerabilities. The DAST scanner supports scanning of assets/targets hosted on both the internal network of an organization and the external/public network using FortiDAST proxy server. See FortiDAST Proxy Server.|
+|**SCA**|Scans for vulnerabilities in the open-source libraries/components used by the application. The programming languages supported by the SCA scanner are Java, Javascript, Ruby, Python, Golang, and PHP.|
+_Others Scanneres ..._
+
+|Sacanner|Description|
+|---|---|
+|**Secret**|Scans to detect certificates and other secrets committed into Git.|
+|**IaC**|Scans your IaC configuration files for Terraform, Cloud Formation, Docker and Kubernetes, to detect configuration issues.|
+|**Container**|Scans container components to identify potential vulnerabilities.|
+
 
 _**`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, 40M read/write operations and about 80GB storage monthly for free - sufficient to run small production workloads. If you end your credits the databases will pause, no charge_
 
