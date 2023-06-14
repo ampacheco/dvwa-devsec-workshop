@@ -3,8 +3,13 @@
 
 Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy it can be to create a GitHub actions workflow that aggregates a security layer to your current DevOps practice.
 
-> [🔖 Accessing HANDS-ON](#-start-hands-on)
+## 👩‍💻 Pre-Requisites
 
+1. Create a FortiDevSec Account 
+1. A Github Account to [fork](https://github.com/ampacheco/dvwa-devsec-workshop/fork) this repository and runs github [actions](https://github.com/features/actions) 
+1. An [Azure Subscriptions](https://azure.microsoft.com/en-us/free/) to Deploy [Damn Vulnerable Web Application](https://github.com/digininja/DVWA) canonical app to demonstrate DAST feature. In this particular case, it deployed on [Azure Container Instances Service](https://azure.microsoft.com/en-us/products/container-instances).
+<p><br/>
+    
 ## 📋 Table of contents
 
 <img src="https://avatars.githubusercontent.com/u/39314919?s=200&v=4" align="right" width="300px"/>
@@ -18,16 +23,13 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 7. [Homework](#7-homework)
 8. [What's NEXT ](#8-whats-next-)
 <p><br/>
-
+    
 ## 1. Objectives
-
-1️⃣ **Give you an understanding and how and where to position Apache Cassandra™**
-
-2️⃣ **Give an overview of the NoSQL ecosystem and its rationale**
-
-3️⃣ **Provide an overview of Cassandra Architecture**
-
-4️⃣ **Make you create your first tables and run your first statements**
+   
+1️⃣ Introduce FortiDevSec as a simple tool to add a security layer to your current continuous application development workflow<p/>
+2️⃣ If you have never used it, introduce GitHub actions as a simple workflow engine to manage the complete lifecycle<p/>
+3️⃣ Describe and explain the configuration yaml file required to connect your workflow engine with FortiDevSec<p/>
+4️⃣ Describe and explain the steps required to implement SAST and DAST scans.
 
 🚀 **Have fun with an interactive session**
 
