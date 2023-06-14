@@ -79,6 +79,54 @@ These hands-on labs explore how to add SAST and DAST scanner analisys to your cu
 - Deploy
 - DAST 
 
+In this step, we will create the skeleton of the basic Github actions workflow jobs required to complete our job successfully. 
+
+After completing this step, you will be adding steps per job to incorporate: 
+
+1. SAST
+1. Deployment of our application to Azure as Azure Container Instance
+1. Run DAST Analysis 
+
+T
+
+````
+name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Op📉 🚀🚀  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Workflow
+      run: echo "🏗️ Dummy Step, compile, package, create container for application and ..."
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: sast
+      run: echo "🏗️ test, job sast step"
+
+  depploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy application in azure container
+      run: echo "🏗️ Deploying ..."
+
+  dast:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: DAST analysis
+      run: |
+        echo "🏗️ Runing DAST Analysis"
+
+````
+
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
