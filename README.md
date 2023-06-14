@@ -44,6 +44,12 @@ Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore
 
 ![]()
 
+### The Basic Workflow
+
+![Alt text](image.png)
+
+### Summary of Scanners
+
 |Sacanner|Description|
 |---|---|
 |**SAST**|Scans the source code of an application during development to minimize zero-day vulnerabilities. The application languages supported for SAST are Shell, Java, Ruby on Rails, Python, Golang, PHP, JavaScript/NodeJS, C and C++.|
