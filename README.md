@@ -46,7 +46,7 @@ Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore
 
 ### The Basic Workflow
 
-![Alt text](image.png)
+![The Basic Workflow](/images/the-basic-workflow.png)
 
 ### Summary of Scanners
 
