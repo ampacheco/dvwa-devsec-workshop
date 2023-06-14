@@ -1,0 +1,34 @@
+name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Op📉 🚀🚀  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Workflow
+      run: echo "🏗️ Dummy Step, compile, package, create container for application and ..."
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: sast
+      run: echo "🏗️ test, job sast step"
+
+  depploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy application in azure container
+      run: echo "🏗️ Deploying ..."
+
+  dast:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: DAST analysis
+      run: |
+        echo "🏗️ Runing DAST Analysis"
