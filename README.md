@@ -40,9 +40,15 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 
 FortiDevSec is an  application security testing product that offers a comprehensive SaaS based continuous application testing for software developers and devops, without the need for any security expertise.
 
+
 Navigate to the Live Demo to familiarize yourself with the Basic UI, and explore the main dashboard and then the application dashboard.
 
 ![]()
+
+
+### The UI
+
+![The UI](/images/the-basic-ui.png)
 
 ### The Basic Workflow
 
