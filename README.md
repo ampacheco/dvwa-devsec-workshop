@@ -67,6 +67,19 @@ _Others Scanneres ..._
 ### 🟩The UI
 ![The UI](/images/the-basic-ui.png)
 
+
+## The DevOps Workflow
+
+The number of jobs and steps per job you will end up having in your work depends on the maturity of your current practice. 
+
+These hands-on labs explore how to add SAST and DAST scanner analisys to your current workflow if you have one or bring a ground foundation for a start a DevOps practice with security from the starting point. 
+
+- Build
+- Test - ... as many as you have incorporated into your practice and SAST
+- Deploy
+- DAST 
+
+
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
 
