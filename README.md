@@ -68,7 +68,7 @@ _Others Scanneres ..._
 ![The UI](/images/the-basic-ui.png)
 
 
-## The DevOps Workflow
+## 3. The DevOps Workflow
 
 The number of jobs and steps per job you will end up having in your process depends on the maturity of your current practice. 
 
@@ -87,7 +87,12 @@ After completing this step, you will be adding steps per job to incorporate:
 1. Deployment of our application to Azure as Azure Container Instance
 1. Run DAST Analysis 
 
-T
+If you are unfamiliar with GitHub Actions, please review the [quickstart guidelines](https://docs.github.com/en/actions/quickstart).
+
+For those able to understand the basic workflow, I recommend copying and pasting the yaml in the box into the ./github/workflow/main.yaml file.
+
+To simplify your start, the main file in the repo contains this yaml code. So you will copy and paste the following steps as required.
+
 
 ````
 name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Op📉 🚀🚀  
