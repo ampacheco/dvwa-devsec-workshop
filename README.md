@@ -70,7 +70,7 @@ _Others Scanneres ..._
 
 ## The DevOps Workflow
 
-The number of jobs and steps per job you will end up having in your work depends on the maturity of your current practice. 
+The number of jobs and steps per job you will end up having in your process depends on the maturity of your current practice. 
 
 These hands-on labs explore how to add SAST and DAST scanner analisys to your current workflow if you have one or bring a ground foundation for a start a DevOps practice with security from the starting point. 
 
