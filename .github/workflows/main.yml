@@ -14,12 +14,15 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: build
+    
     steps:
     - name: sast
       run: echo "🏗️ test, job sast step"
 
-  depploy:
+  deploy:
     runs-on: ubuntu-latest
+    needs: test
 
     steps:
     - name: Deploy application in azure container
@@ -27,6 +30,7 @@ jobs:
 
   dast:
     runs-on: ubuntu-latest
+    needs: deploy
 
     steps:
     - name: DAST analysis
