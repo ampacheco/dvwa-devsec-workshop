@@ -16,7 +16,7 @@ languages:
   - javascript
      
 dast:
-  url: http://web-dvwa.eastus.azurecontainer.io/login.php
+  url: http://5d83335f-5157-4e5a-b77a-9f19774468e6.eastus.azurecontainer.io/login.php
   fortipentest_scanner: true #true|false
   full_scan: true #true|false
      
