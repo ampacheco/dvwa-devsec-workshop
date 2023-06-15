@@ -13,12 +13,12 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 
 <img src="https://avatars.githubusercontent.com/u/39314919?s=200&v=4" align="right" width="300px"/>
 
-1. [Objectives](#objectives)
-1. [TheFortiDevSec UI](#the-fortidevsec-ui)
-1. [The DevOps Workflow ](#the-devops-workflow)
-1. [The SAST Job](#the-sast-job)
-1. [Deploy the Application to ACI](#deploy-the-)
-1. [The Dast Job](#the-dast-job)
+1. [Objectives](#1-objectives)
+1. [TheFortiDevSec UI](#2-the-fortidevsec-ui)
+1. [The DevOps Workflow ](#3-the-devops-workflow)
+1. [The SAST Job](#4-the-sast-job)
+1. [Deploy the Application to ACI](#5-deploy-the-)
+1. [The Dast Job](#6-the-dast-job)
 
 <p><br/>
     
