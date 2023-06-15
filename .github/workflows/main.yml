@@ -30,20 +30,13 @@ jobs:
       with:
         creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
             
-      # # Runs a single command using the runners shell
-      # - name: GET Status Code
-      #   run: echo "STATUS_CODE=$(curl -s -v -L -I -o /dev/null  -w "%{http_code}" http://web-dvwa.eastus.azurecontainer.io)" >> "$GITHUB_ENV"
-
-      # # Runs a set of commands using the runners shell
-      # - name: Deploy the App
-      #   if:  ${{ !(env.STATUS_CODE==200) }}
-      #   uses: Azure/cli@v1.0.7
-      #   with:
-      #     azcliversion: 2.30.0
-      #     inlineScript: | 
-      #       az group create -n web-dvwa-rg -l eastus
-      #       az container create --name web-dvwa --dns-name-label web-dvwa --image vulnerables/web-dvwa -g web-dvwa-rg
-
+    - name: Deploy the App
+      uses: Azure/cli@v1.0.7
+      with:
+        azcliversion: 2.30.0
+        inlineScript: | 
+          az group create -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -l eastus
+          az container create --name ${{ vars.AZ_ACI_DNS_PREFIX }} --dns-name-label ${{ vars.AZ_ACI_DNS_PREFIX }} --image vulnerables/web-dvwa -g ${{ vars.AZ_ACI_DNS_PREFIX }}-rg
     
   dast:
     runs-on: ubuntu-latest
