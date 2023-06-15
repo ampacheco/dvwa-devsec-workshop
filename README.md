@@ -93,7 +93,7 @@ To simplify your start, the main file in the repo contains this yaml code. So yo
 
 
 ````
-name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Op📉 🚀🚀  
+name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
 on:
   push:
     branches: [ "main" ]
@@ -109,12 +109,15 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: build
+    
     steps:
     - name: sast
       run: echo "🏗️ test, job sast step"
 
-  depploy:
+  deploy:
     runs-on: ubuntu-latest
+    needs: test
 
     steps:
     - name: Deploy application in azure container
@@ -122,12 +125,12 @@ jobs:
 
   dast:
     runs-on: ubuntu-latest
+    needs: deploy
 
     steps:
     - name: DAST analysis
       run: |
         echo "🏗️ Runing DAST Analysis"
-
 ````
 
 
