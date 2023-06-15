@@ -146,6 +146,12 @@ If everything runs successfully you should see something like that.
 
 ## 4. The SAST Job
 
+It is out of our current scope to build, containerize and push the created container to a registry. For simplicity's sake, I will keep the job empty, and you can assume that the job was completed with the right tasks, and I will start our next step, which should be adding the SAST step to our workflow.  
+
+It is out of our current scope to build, containerize and push the created container to a registry. For simplicity's sake, I will keep the job empty, and you can assume that the job was completed with the right tasks, and I will start our next step, which should be adding the SAST step to our workflow.  
+
+To complete SAST task, you need to add to your test job the next step.
+
 ````
   test:
     runs-on: ubuntu-latest
@@ -160,6 +166,55 @@ If everything runs successfully you should see something like that.
       docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
       docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
 ````
+
+After completing the edition, your complete workflow should be something like that. Note I am adding a green check box to the tasks completed.
+
+````
+name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: ✅ Build Workflow
+      run: echo "🏗️ Dummy Step, compile, package, create container for application and ..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    # SAST STEPS
+    – name: ✅ SAST
+      run: |
+      env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
+      docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+      docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Deploy application in azure container
+      run: echo "🏗️ Deploying ..."
+
+  dast:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
+    - name: DAST analysis
+      run: |
+        echo "🏗️ Runing DAST Analysis"
+````
+
+
+
 
 
 **... and see you at our next workshop!**
