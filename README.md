@@ -140,8 +140,26 @@ Remember that this step was completed for you,  so edit the file to familiarize 
 After updating the main.yml file, workflow is triggered. Then you go to the actions tab [1], click workflow name [2], and click the last run details[3].  
 ![](/images/actions.png)
 
-If everything runs succesfully you should see something like that. 
+If everything runs successfully you should see something like that. 
 ![](/images/basic-workflow-created.png)
+
+
+## 4. The SAST Job
+
+````
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    # All Other Steps
+     
+    # SAST STEPS
+    – name: SAST
+      run: |
+      env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
+      docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+      docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+````
 
 
 **... and see you at our next workshop!**
