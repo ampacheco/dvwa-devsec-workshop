@@ -242,12 +242,12 @@ az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptio
 ````
 Store the variables as secrets in your GitHub Project|Settings|Security| Secrets and Variables.
 
-|**VAR**|VALUE|
+|VAR|VALUE|
 |---|----|
-|CLIENT_ID|clientId|
-|CLIENT_SECRET|clientSecret|
-|SUBSCTIPTION_ID|subscriptionId|
-|TENANT_ID|tenantId|
+|**CLIENT_ID**|clientId|
+|**CLIENT_SECRET**|clientSecret|
+|**SUBSCTIPTION_ID**|subscriptionId|
+|**TENANT_ID**|tenantId|
 
 ![Secrets](/images/secrets.png)
 
