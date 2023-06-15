@@ -9,19 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: ✅ Build Workflow
+    - name: Build Workflow
       run: echo "🏗️ Dummy Step, compile, package, create container for application and ..."
 
   test:
     runs-on: ubuntu-latest
     needs: build
-
-    # SAST STEPS
-    – name: ✅ SAST
-      run: |
-      env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-      docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
-      docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+    
+    steps:
+    - name: sast
+      run: echo "🏗️ test, job sast step"
 
   deploy:
     runs-on: ubuntu-latest
