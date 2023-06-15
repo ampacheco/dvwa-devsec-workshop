@@ -26,7 +26,9 @@ jobs:
 
     steps:
     - name: Deploy application in azure container
-      run: echo "🏗️ Deploying ..."
+      run: |
+        echo "🏗️ Deploying ..."
+        echo "🏗️ Deploying ... @ ${{ env.AZ_ACI_DNS_PREFIX }}"
 
   dast:
     runs-on: ubuntu-latest
