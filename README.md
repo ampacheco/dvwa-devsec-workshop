@@ -13,14 +13,13 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 
 <img src="https://avatars.githubusercontent.com/u/39314919?s=200&v=4" align="right" width="300px"/>
 
-1. [Objectives](#1-objectives)
-2. [Frequently asked questions](#2-frequently-asked-questions)
-3. [Materials for the Session](#3-materials-for-the-session)
-4. [Create your Database](#4-create-your-astra-db-instance)
-5. [Create tables](#5-create-tables)
-6. [Execute CRUD operations](#6-execute-crud-operations)
-7. [Homework](#7-homework)
-8. [What's NEXT ](#8-whats-next-)
+1. [Objectives](#objectives)
+1. [TheFortiDevSec UI](#the-fortidevsec-ui)
+1. [The DevOps Workflow ](#the-devops-workflow)
+1. [The SAST Job](#the-sast-job)
+1. [Deploy the Application to ACI](#deploy-the-)
+1. [The Dast Job](#the-dast-job)
+
 <p><br/>
     
 ## 1. Objectives
