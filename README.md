@@ -253,13 +253,25 @@ Store the variables as secrets in your GitHub Project|Settings|Security| Secrets
 
 ### 🟩5.3 Now you can complete the deploy workflow adding the nexte two steps
 
+
+````
+````
+The complete workflow should be similar to the following yaml file
+
+We need also to add a clean up step to delete Azure Container Instances Once we finish with the DAST test. 
+
 ````
 ````
 
-The complete workflow should be similar to the dollowing yaml file
+## 6. The DAST Job
+Add the following code to DAST workflow
 ````
 ````
 
+Afeterediting the main.yaml file you will end up with the following main.yml file
+
+````
+````
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
