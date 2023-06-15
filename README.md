@@ -219,7 +219,7 @@ Steps to Deploy Application as Azure Container Instances.
 <p/><br/>
 ### 🟩5.1 Using a [guid](https://guidgenerator.com/online-guid-generator.aspx) generator online, we will create a unique name for DNS required to deploy your app. We will store it as a variable in  your GitHub Project|Settings|Security| Secrets and Variables
 
-![]()
+![Variables](/images/variables.png)
 
 ### 🟩5.2 Run the following command to get the Azure service principal to run Azure cli commands in GitHub Actions
 
@@ -248,6 +248,8 @@ Store the variables as secrets in your GitHub Project|Settings|Security| Secrets
 |CLIENT_SECRET|clientSecret|
 |SUBSCTIPTION_ID|subscriptionId|
 |TENANT_ID|tenantId|
+
+![Secrets](/images/secrets.png)
 
 ### 🟩5.3 Now you can complete the deploy workflow adding the nexte two steps
 
