@@ -133,6 +133,16 @@ jobs:
         echo "🏗️ Runing DAST Analysis"
 ````
 
+Remember that this step was completed for you,  so edit the file to familiarize yourself with the process by adding a simple comment to the beginning of the file. 
+````
+# Actions Workflow setup completed
+````
+After updating the main.yml file, workflow is triggered. Then you go to the actions tab [1], click workflow name [2], and click the last run details[3].  
+![](/images/actions.png)
+
+If everything runs succesfully you should see something like that. 
+![](/images/basic-workflow-created.png)
+
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
