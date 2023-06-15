@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Build Workflow
+    - name: ✅ Build Workflow
       run: echo "🏗️ Dummy Step, compile, package, create container for application and ..."
 
   test:
@@ -25,9 +25,26 @@ jobs:
     needs: test
 
     steps:
-    - name: Deploy application in azure container
-      run: echo "🏗️ Deploying ..."
+    - name: ✅ Azure Login
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
+            
+      # # Runs a single command using the runners shell
+      # - name: GET Status Code
+      #   run: echo "STATUS_CODE=$(curl -s -v -L -I -o /dev/null  -w "%{http_code}" http://web-dvwa.eastus.azurecontainer.io)" >> "$GITHUB_ENV"
 
+      # # Runs a set of commands using the runners shell
+      # - name: Deploy the App
+      #   if:  ${{ !(env.STATUS_CODE==200) }}
+      #   uses: Azure/cli@v1.0.7
+      #   with:
+      #     azcliversion: 2.30.0
+      #     inlineScript: | 
+      #       az group create -n web-dvwa-rg -l eastus
+      #       az container create --name web-dvwa --dns-name-label web-dvwa --image vulnerables/web-dvwa -g web-dvwa-rg
+
+    
   dast:
     runs-on: ubuntu-latest
     needs: deploy
