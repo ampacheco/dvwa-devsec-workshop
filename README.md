@@ -213,8 +213,50 @@ jobs:
         echo "🏗️ Runing DAST Analysis"
 ````
 
+## 5. Deploy the aplication to ACI
 
+Steps to Deploy Application as Azure Container Instances.
+<p/><br/>
+### 🟩5.1 Using a [guid](https://guidgenerator.com/online-guid-generator.aspx) generator online, we will create a unique name for DNS required to deploy your app. We will store it as a variable in  your GitHub Project|Settings|Security| Secrets and Variables
 
+![]()
+
+### 🟩5.2 Run the following command to get the Azure service principal to run Azure cli commands in GitHub Actions
+
+🟦Command
+````
+az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} --sdk-auth
+````
+🟦Output
+
+````
+ {
+   "clientId": "<GUID>",
+   "clientSecret": "<STRING>",
+   "subscriptionId": "<GUID>",
+   "tenantId": "<GUID>",
+   "resourceManagerEndpointUrl": "<URL>"
+   (...)
+ }
+
+````
+Store the variables as secrets in your GitHub Project|Settings|Security| Secrets and Variables.
+
+|**VAR**|VALUE|
+|---|----|
+|CLIENT_ID|clientId|
+|CLIENT_SECRET|clientSecret|
+|SUBSCTIPTION_ID|subscriptionId|
+|TENANT_ID|tenantId|
+
+### 🟩5.3 Now you can complete the deploy workflow adding the nexte two steps
+
+````
+````
+
+The complete workflow should be similar to the dollowing yaml file
+````
+````
 
 
 **... and see you at our next workshop!**
