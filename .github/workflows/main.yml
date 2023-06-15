@@ -32,21 +32,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    
-    steps:
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-            
-      # Runs a set of commands using the runners shell
-      - name: Deploy the App
-        uses: Azure/cli@v1.0.7
-        with:
-          azcliversion: 2.30.0
-          inlineScript: | 
-            az group create -n "${{ vars.AZ_ACI_DNS_PREFIX }}-rg" -l eastus
-            az container create --name "${{ vars.AZ_ACI_DNS_PREFIX }}" --dns-name-label "${{ vars.AZ_ACI_DNS_PREFIX }}" --image vulnerables/web-dvwa -g "${{ vars.AZ_ACI_DNS_PREFIX }}-rg"
             
   dast:
     runs-on: ubuntu-latest
