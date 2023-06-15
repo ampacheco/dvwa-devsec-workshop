@@ -17,7 +17,7 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 1. [TheFortiDevSec UI](#2-the-fortidevsec-ui)
 1. [The DevOps Workflow ](#3-the-devops-workflow)
 1. [The SAST Job](#4-the-sast-job)
-1. [Deploy the Application to ACI](#5-deploy-the-application-to-aci)
+1. [Deploy the Application to ACI](#5-deploy-the-aplication-to-aci)
 1. [The Dast Job](#6-the-dast-job)
 
 <p><br/>
