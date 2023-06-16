@@ -1,8 +1,8 @@
 version: v1
 
 id:
-  org: f3f72eaa-b943-497b-b00e-eb57d9ac7574 # afafafaf-af00-af00-f00e-eco747474747
-  app: f2293444-75b4-449d-ba74-ad8a83e22b2b # afafafaf-af00-af00-f00e-eco747474747
+  org: # copy your org ID
+  app: # copy your app ID
 
 # Optional parameters.
 scanners:
