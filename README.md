@@ -31,6 +31,7 @@ Welcome to FortiDevSec simple demo. A half-hour workshop to demonstrate how easy
 
 🚀 **Have fun with an interactive session**
 
+📋 [Go to Table of Contents](#-table-of-contents)
 
 # 🏁 Start Hands-on
 
@@ -43,6 +44,7 @@ Navigate to the [Live Demo](https://fortidevsec.forticloud.com/#/secOpsDashboard
 
 👉 [Explore Live Demo](https://fortidevsec.forticloud.com/#/secOpsDashboard)
 
+📋 [Go to Table of Contents](#-table-of-contents)
 
 ### 🟩The Basic Workflow
 
@@ -65,6 +67,7 @@ _Others Scanneres ..._
 ### 🟩The UI
 ![The UI](/images/the-basic-ui.png)
 
+📋 [Go to Table of Contents](#-table-of-contents)
 
 ## 3. The DevOps Workflow
 
@@ -141,6 +144,7 @@ After updating the main.yml file, workflow is triggered. Then you go to the acti
 If everything runs successfully you should see something like that. 
 ![](/images/basic-workflow-created.png)
 
+📋 [Go to Table of Contents](#-table-of-contents)
 
 ## 4. The SAST Job
 
@@ -210,6 +214,7 @@ jobs:
       run: |
         echo "🏗️ Runing DAST Analysis"
 ````
+📋 [Go to Table of Contents](#-table-of-contents)
 
 ## 5. Deploy the aplication to ACI
 
@@ -323,7 +328,7 @@ jobs:
           az group delete -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -y
   
 ````
-📋[Go to Table of Content]()
+📋 [Go to Table of Contents](#-table-of-contents)
 
 ## 6. The DAST Job
 
@@ -409,6 +414,7 @@ jobs:
           az group delete -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -y
   
 ````
+
 📋 [Go to Table of Contents](#-table-of-contents)
 
 **... and see you at our next workshop!**
