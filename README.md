@@ -408,88 +408,9 @@ jobs:
 ````
 
 ## 6. The DAST Job
-Add the following code to DAST workflow
-````
-name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: ✅ Build Workflow
-      run: echo "✅ Dummy Step, compile, package, create container for application and ..."
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-    - name: ✅ Checkout
-      uses: actions/checkout@v2
-
-    - name: ✅ SAST
-      run: |
-        env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-        docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
-        docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
-    
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-    - name: ✅ Azure Login
-      uses: azure/login@v1
-      with:
-        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-            
-    - name: ✅ Deploy the App
-      uses: Azure/cli@v1.0.7
-      with:
-        azcliversion: 2.30.0
-        inlineScript: | 
-          az group create -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -l eastus
-          az container create --name ${{ vars.AZ_ACI_DNS_PREFIX }} --dns-name-label ${{ vars.AZ_ACI_DNS_PREFIX }} --image vulnerables/web-dvwa -g ${{ vars.AZ_ACI_DNS_PREFIX }}-rg
-    
-  dast:
-    runs-on: ubuntu-latest
-    needs: deploy
-    
-    steps:
-    - name: ✅ Checkout
-      uses: actions/checkout@v2
-
-    - name: ✅ DAST
-      run: | 
-        env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-        docker pull registry.fortidevsec.forticloud.com/fdevsec_dast:latest
-        docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest
-
-  clean-up-az:
-    runs-on: ubuntu-latest
-    needs: dast
-
-    steps:
-    - name: ✅ Azure Login
-      uses: azure/login@v1
-      with:
-        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-            
-    - name: ✅ Clean Up Azure Container Instances App
-      uses: Azure/cli@v1.0.7
-      with:
-        azcliversion: 2.30.0
-        inlineScript: | 
-          az group delete -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -y
-  
-````
-
-Afeterediting the main.yaml file you will end up with the following main.yml file
+Once we have an application in a pre-production environment, we can add the DAST job, and after updating the main.yml file, you will trigger a new run. 
+Check the DAST job on the following file and copy and paste it into your current main.yml file.
 
 ````
 name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
@@ -570,6 +491,7 @@ jobs:
           az group delete -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -y
   
 ````
+
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
