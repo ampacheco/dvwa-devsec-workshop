@@ -409,7 +409,7 @@ jobs:
           az group delete -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -y
   
 ````
-📋 [Go to Table of Contents](#table_of_contents)
+📋 [Go to Table of Contents](#-table-of-contents)
 
 **... and see you at our next workshop!**
 > Sincerely yours, The BDE Team
