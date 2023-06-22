@@ -250,9 +250,10 @@ Store the variables as secrets in your GitHub Project|Settings|Security| Secrets
 
 ![Secrets](/images/secrets.png)
 
-### 🟩5.3 Now you can complete the deploy workflow adding the nexte two steps
+### 🟩5.3 
+Now you can complete the deploy workflow, adding the following two steps and an additional job to destroy the Microsoft Azure container instance created. 
 
-
+The complete workflow should be the following.
 ````
 name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
 on:
@@ -303,16 +304,6 @@ jobs:
   dast:
     runs-on: ubuntu-latest
     needs: deploy
-    
-    steps:
-    - name: ✅ Checkout
-      uses: actions/checkout@v2
-
-    - name: ✅ DAST
-      run: | 
-        env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-        docker pull registry.fortidevsec.forticloud.com/fdevsec_dast:latest
-        docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest
 
   clean-up-az:
     runs-on: ubuntu-latest
