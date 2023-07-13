@@ -10,10 +10,6 @@ scanners:
   - dast
   - secret
   - sca   
-
-resource:
-  serial_scan: true #true|false
-
   
 # languages:
 #   - python
