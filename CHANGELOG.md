@@ -1,3 +1,7 @@
+
+Fixed
+
+
 DAMN VULNERABLE WEB APPLICATION
 =======================
 
