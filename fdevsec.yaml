@@ -21,4 +21,4 @@ dast:
   full_scan: true #true|false
      
 resource:
-  serial_scan: true #true|false
+  serial_scan: false #true|false
