@@ -11,9 +11,9 @@ scanners:
   - secret
   - sca   
   
-# languages:
-#   - python
-#   - javascript
+languages:
+ - python
+ - javascript
      
 dast:
   url: http://5d83335f-5157-4e5a-b77a-9f19774468e6.eastus.azurecontainer.io/login.php
