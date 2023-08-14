@@ -1,4 +1,4 @@
-name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
+name: 🚀🚀  DAST Workflow Only 🚀🚀  
 on:
   push:
     branches: [ "main" ]
