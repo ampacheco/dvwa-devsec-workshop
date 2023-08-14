@@ -1,8 +1,8 @@
 version: v1
 
 id:
-  org: 4a994333-ec6e-4337-9555-f35def74f373 
-  app: 8b2add45-ab98-4c56-b47d-e30a2df73186
+  app: af557c48-8f88-467b-b7f0-458ee3c977f2
+  org: 4a994333-ec6e-4337-9555-f35def74f373
   
 # Optional parameters.
 scanners:
