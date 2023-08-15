@@ -22,3 +22,6 @@ dast:
      
 resource:
   serial_scan: false #true|false
+
+
+# by Alejandro Pacheco
