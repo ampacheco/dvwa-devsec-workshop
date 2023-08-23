@@ -1,7 +1,14 @@
 version: v1
+
+# Test H.Org
 id:
-  app: 1d6dd36a-2c9c-4d27-a4f9-1bed06685e3a
-  org: ac869b34-f18d-4786-ad0b-c36255a89256
+  org: 788704fe-9ca6-4c0f-a392-4eba472d694c 
+  app: 39762676-cb18-4d54-9f59-a0549104b9a4
+
+#  My Org
+#id:
+#  app: 1d6dd36a-2c9c-4d27-a4f9-1bed06685e3a
+#  org: ac869b34-f18d-4786-ad0b-c36255a89256
 
 # Optional parameters.
 scanners:
