@@ -16,8 +16,8 @@ languages:
      
 dast:
   url: http://5d83335f-5157-4e5a-b77a-9f19774468e6.eastus.azurecontainer.io/login.php
-  fortipentest_scanner: true #true|false
-  # full_scan: true #true|false
+  fortipentest_scanner: false #true|false
+  full_scan: false #true|false
      
 resource:
   serial_scan: false #true|false
