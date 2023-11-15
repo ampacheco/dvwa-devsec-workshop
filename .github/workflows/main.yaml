@@ -1,5 +1,9 @@
 name: 🚀🚀 Basic 👨‍💻Dev - Sec🪲 Ops📉  Workflow 🚀🚀  
 on:
+  workflow_run:
+    workflows: [Pre Work]
+    types:
+      - completed
   push:
     branches: [ "main" ]
   pull_request:
