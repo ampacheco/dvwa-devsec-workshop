@@ -17,9 +17,9 @@ languages:
  - python
 
 # Configures target url where dynamic scan should be performed.
-# dast:
-#  url: https://d57770e5-2e61-47ac-8217-426dce04c555.eastus.azurecontainer.io/login.php
-#  full_scan: true #true|false
+dast:
+ url: https://${{ env.AZ_ACI_DNS_PREFIX }}.eastus.azurecontainer.io/login.php
+ full_scan: true #true|false
 
 # Language scanners run sequentially by default. Can be configured to run in parallel.
 #resource:
