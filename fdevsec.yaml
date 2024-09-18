@@ -17,9 +17,9 @@ languages:
  - python
 
 # Configures target url where dynamic scan should be performed.
-dast:
- url: https://your.url.com
- full_scan: true #true|false
+# dast:
+#  url: https://d57770e5-2e61-47ac-8217-426dce04c555.eastus.azurecontainer.io/login.php
+#  full_scan: true #true|false
 
 # Language scanners run sequentially by default. Can be configured to run in parallel.
 #resource:
@@ -27,7 +27,7 @@ dast:
 
 # CI/CD pipeline fails when risk rating(range 0-9) exceeds the configured value.
 fail_pipeline:
- risk_rating: 7
+ risk_rating: 9
 
 # Only for FortiDevSec OnPrem users. Cloud users should keep it commented
 #on_prem:
