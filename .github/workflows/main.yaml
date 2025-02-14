@@ -17,7 +17,7 @@ jobs:
     - name: ✅ Build Workflow
       run: echo "✅ Dummy Step, compile, package, create container for application and ..."
 
-  test:
+  SAST:
     runs-on: ubuntu-latest
     needs: build
 
@@ -49,7 +49,7 @@ jobs:
           az group create -n ${{ vars.AZ_ACI_DNS_PREFIX }}-rg -l eastus
           az container create --name ${{ vars.AZ_ACI_DNS_PREFIX }} --dns-name-label ${{ vars.AZ_ACI_DNS_PREFIX }} --image ${{ vars.IMAGE_NAME }} -g ${{ vars.AZ_ACI_DNS_PREFIX }}-rg --registry-username ${{ secrets.ACR_USERNAME }} --registry-password ${{ secrets.ACR_USERPASSWORD }}
     
-  dast:
+  DAST:
     runs-on: ubuntu-latest
     needs: deploy
     
