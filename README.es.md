@@ -1,4 +1,3 @@
-> Modificado
 # DAMN VULNERABLE WEB APPLICATION
 > update 2023/11/15 
 > Demo
